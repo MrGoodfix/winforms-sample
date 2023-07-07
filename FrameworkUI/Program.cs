@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Sample.Core.Interest;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FrameworkUI
@@ -26,6 +24,8 @@ namespace FrameworkUI
         static void ConfigureServices()
         {
             var services = new ServiceCollection();
+
+            services.AddScoped<IInterestForecastHandler, InterestForecastHandler>();
 
             ServiceProvider = services.BuildServiceProvider();
         }

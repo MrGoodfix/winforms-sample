@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FrameworkUI.Views;
+using System;
 using System.Windows.Forms;
 
 namespace FrameworkUI
@@ -15,6 +9,11 @@ namespace FrameworkUI
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void btnInterestCalc_Click(object sender, EventArgs e)
+        {
+            new InterestCalculatorView().Show();
         }
     }
 }
