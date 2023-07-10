@@ -1,6 +1,9 @@
-﻿using Sample.Core.Interest;
+﻿
+using Sample.Core.Interest;
 using Sample.Core.Views;
 using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FrameworkUI.Presenters
 {
@@ -17,7 +20,21 @@ namespace FrameworkUI.Presenters
 
         public List<BalanceForecast> Calculate(InterestForecastRequest request)
         {
-            return _forecastHandler.Calculate(request);
+
+            var result = _forecastHandler.Calculate(request);
+
+            if (result.Errors.Count > 0)
+            {
+                var builder = new StringBuilder();
+                builder.AppendLine("Invalid input!");
+                foreach (var failure in result.Errors)
+                {
+                    builder.AppendLine(failure);
+                }
+                _view.HandleNotification(builder.ToString());
+            }
+
+            return result.Forecasts;
         }
     }
 }
