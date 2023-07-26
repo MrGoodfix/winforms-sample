@@ -1,34 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Sample.Core.Interest
 {
     public class InterestForecastHandler : IInterestForecastHandler
     {
-        public InterestForecastResponse Calculate(InterestForecastRequest request)
-        {
-            var response = new InterestForecastResponse();
-            Validate(request, response);
-            if (response.Errors.Count == 0)
-            {
-                response.Forecasts = CalculateNow(request);
-            }
-
-            return response;
-        }
-
-        private void Validate(InterestForecastRequest request, InterestForecastResponse response) 
+        public Result<List<BalanceForecast>, List<string>> Forecast(InterestForecastRequest request)
         {
             var validator = new InterestForecastValidator();
-            var result = validator.Validate(request);
-            if (result.IsValid != true) 
+            var validationResults = validator.Validate(request);
+            if (validationResults.IsValid != true)
             {
-                foreach (var failure in result.Errors)
+                var errorList = new List<string>();
+                foreach (var failure in validationResults.Errors)
                 {
-                    response.Errors.Add($"{failure.PropertyName}: {failure.ErrorMessage}");
+                    errorList.Add($"{failure.PropertyName}: {failure.ErrorMessage}");
                 }
+                return errorList;
             }
+
+            return CalculateNow(request);
         }
 
         private List<BalanceForecast> CalculateNow(InterestForecastRequest request)

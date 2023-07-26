@@ -4,6 +4,6 @@ namespace Sample.Core.Interest
 {
     public interface IInterestForecastHandler
     {
-        InterestForecastResponse Calculate(InterestForecastRequest request);
+        Result<List<BalanceForecast>, List<string>> Forecast(InterestForecastRequest request);
     }
 }

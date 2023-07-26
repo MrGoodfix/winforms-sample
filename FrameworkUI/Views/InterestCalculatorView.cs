@@ -35,9 +35,13 @@ namespace FrameworkUI.Views
                     Years = (int)numYears.Value
                 };
 
-                var forecasts = _presenter.Calculate(request);
-                displayBalanceForecasts(forecasts);
+                _presenter.Calculate(request);
             }
+        }
+
+        public void DisplayForecasts(List<BalanceForecast> forecasts)
+        {
+            displayBalanceForecasts(forecasts);
         }
 
         private void displayBalanceForecasts(List<BalanceForecast> forecasts)

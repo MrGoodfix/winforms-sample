@@ -3,7 +3,6 @@ using Sample.Core.Interest;
 using Sample.Core.Views;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FrameworkUI.Presenters
 {
@@ -18,23 +17,24 @@ namespace FrameworkUI.Presenters
             _forecastHandler = Program.GetService<IInterestForecastHandler>();
         }
 
-        public List<BalanceForecast> Calculate(InterestForecastRequest request)
+        public void Calculate(InterestForecastRequest request)
         {
-
-            var result = _forecastHandler.Calculate(request);
-
-            if (result.Errors.Count > 0)
+            var response = _forecastHandler.Forecast(request);
+            if (response.IsSuccess)
             {
+                _view.DisplayForecasts(response.Value);
+            }
+            else
+            {
+                _view.DisplayForecasts(new List<BalanceForecast>());
                 var builder = new StringBuilder();
-                builder.AppendLine("Invalid input!");
-                foreach (var failure in result.Errors)
+                builder.AppendLine("Bad show!");
+                foreach (var failure in response.Error)
                 {
                     builder.AppendLine(failure);
                 }
                 _view.HandleNotification(builder.ToString());
             }
-
-            return result.Forecasts;
         }
     }
 }
