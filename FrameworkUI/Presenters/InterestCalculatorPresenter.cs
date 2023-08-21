@@ -1,12 +1,10 @@
-﻿
-using Sample.Core.Interest;
-using Sample.Core.Views;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using Sample.Core.Interest;
 
 namespace FrameworkUI.Presenters
 {
-    public class InterestCalculatorPresenter
+    public class InterestCalculatorPresenter : IInterestCalculatorPresenter
     {
         private readonly IInterestCalculatorView _view;
         private readonly IInterestForecastHandler _forecastHandler;
@@ -27,14 +25,20 @@ namespace FrameworkUI.Presenters
             else
             {
                 _view.DisplayForecasts(new List<BalanceForecast>());
-                var builder = new StringBuilder();
-                builder.AppendLine("Bad show!");
-                foreach (var failure in response.Error)
-                {
-                    builder.AppendLine(failure);
-                }
-                _view.HandleNotification(builder.ToString());
+                _view.HandleNotification(FormatErrors(response.Error));
             }
+        }
+
+        private string FormatErrors(List<string> errors)
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine("Bad show!");
+            foreach (var failure in errors)
+            {
+                builder.AppendLine(failure);
+            }
+
+            return builder.ToString();
         }
     }
 }

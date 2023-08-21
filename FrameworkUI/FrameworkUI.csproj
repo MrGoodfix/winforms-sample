@@ -68,14 +68,21 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\InterestCalculatorPresenter.cs" />
+    <Compile Include="Presenters\StructuralMediatorPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\IInterestCalculatorView.cs" />
+    <Compile Include="Views\IMediatorView.cs" />
     <Compile Include="Views\InterestCalculatorView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\InterestCalculatorView.Designer.cs">
       <DependentUpon>InterestCalculatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StructuralMediatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\StructuralMediatorView.Designer.cs">
+      <DependentUpon>StructuralMediatorView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -91,6 +98,9 @@
     </Compile>
     <EmbeddedResource Include="Views\InterestCalculatorView.resx">
       <DependentUpon>InterestCalculatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StructuralMediatorView.resx">
+      <DependentUpon>StructuralMediatorView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

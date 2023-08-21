@@ -1,17 +1,16 @@
-﻿using FrameworkUI.Presenters;
-using Sample.Core.Interest;
-using Sample.Core.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
+using FrameworkUI.Presenters;
+using Sample.Core.Interest;
 
 namespace FrameworkUI.Views
 {
     public partial class InterestCalculatorView : Form, IInterestCalculatorView
     {
-        private readonly InterestCalculatorPresenter _presenter;
+        private readonly IInterestCalculatorPresenter _presenter;
 
         public InterestCalculatorView()
         {

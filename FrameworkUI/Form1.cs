@@ -15,5 +15,10 @@ namespace FrameworkUI
         {
             new InterestCalculatorView().Show();
         }
+
+        private void btnStructuralMediator_Click(object sender, EventArgs e)
+        {
+            new StructuralMediatorView().Show();
+        }
     }
 }

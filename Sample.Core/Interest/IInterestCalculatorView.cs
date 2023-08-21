@@ -1,7 +1,6 @@
-﻿using Sample.Core.Interest;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Sample.Core.Views
+namespace Sample.Core.Interest
 {
     public interface IInterestCalculatorView
     {
