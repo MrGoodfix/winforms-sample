@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FrameworkUI.Views;
+﻿using FrameworkUI.Views;
 using Sample.Core.Mediator;
 using Sample.Core.Mediator.Structural;
 
@@ -12,26 +7,75 @@ namespace FrameworkUI.Presenters
     public class StructuralMediatorPresenter
     {
         private readonly IMediatorView _view;
-        private readonly StructuralMediator _mediator;
-        private readonly StructuralColleague _colleague1;
-        private readonly StructuralColleague _colleague2;
+        private IMediator _mediator;
+        private IColleague _colleague1;
+        private IColleague _colleague2;
 
         public StructuralMediatorPresenter(IMediatorView view)
         {
             _view = view;
-            _mediator = new StructuralMediator();
-            _colleague1 = new StructuralColleague(_mediator, "Colleague1");
-            _colleague1.OnNotification += NotifyView;
-            _colleague2 = new StructuralColleague(_mediator, "Colleague2");
-            _colleague2.OnNotification += NotifyView;
-            _mediator.Colleague1 = _colleague1;
-            _mediator.Colleague2 = _colleague2;
+            //BasicSetup();
+            //ListSetup();
+            MediatorCreateSetup();
+        }
+
+        private void BasicSetup()
+        {
+            var mediator = new StructuralMediator();
+
+            var colleague1 = new StructuralColleague(mediator, "Colleague1");
+            colleague1.OnNotification += NotifyView;
+            _colleague1 = colleague1;
+
+            var colleague2 = new StructuralColleague(mediator, "Colleague2");
+            colleague2.OnNotification += NotifyView;
+            _colleague2 = colleague2;
+
+            mediator.Colleague1 = colleague1;
+            mediator.Colleague2 = colleague2;
+
+            _mediator = mediator;
+        }
+
+        private void ListSetup()
+        {
+            var mediator = new StructuralListMediator();
+
+            var colleague1 = new StructuralColleague(mediator, "Colleague1");
+            colleague1.OnNotification += NotifyView;
+            _colleague1 = colleague1;
+
+            var colleague2 = new StructuralColleague(mediator, "Colleague2");
+            colleague2.OnNotification += NotifyView;
+            _colleague2 = colleague2;
+
+            mediator.Register(colleague1);
+            mediator.Register(colleague2);
+
+            _mediator = mediator;
+        }
+
+        private void MediatorCreateSetup()
+        {
+            var mediator = new StructuralListMediator();
+
+            var c1 = mediator.CreateColleague<StructuralColleague>();
+            c1.Name = "Bilbo Baggins";
+            c1.OnNotification += NotifyView;
+            _colleague1 = c1;
+
+            var c2 = mediator.CreateColleague<StructuralColleague>();
+            c2.Name = "Tom Bombadil";
+            c2.OnNotification += NotifyView;
+            _colleague2 = c2;
+
+            _mediator = mediator;
         }
 
         public void StartMediating()
         {
-            _colleague1.Send("Hello, World! (from Colleague1)");
-            _colleague2.Send("Hi, there! (from Colleague2)");
+            _colleague1.Send("Hello, World!");
+            _colleague2.Send("Hi, there!");
         }
 
         public void NotifyView(Colleague colleague, string message)

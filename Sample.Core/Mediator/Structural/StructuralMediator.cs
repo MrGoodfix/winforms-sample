@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sample.Core.Mediator.Structural
+﻿namespace Sample.Core.Mediator.Structural
 {
     public class StructuralMediator : Mediator
     {
@@ -13,11 +9,11 @@ namespace Sample.Core.Mediator.Structural
         {
             if (colleague == Colleague1)
             {
-                Colleague2.HandleNotification(message);
+                Colleague2.HandleNotification(colleague, message);
             }
             else
             {
-                Colleague1.HandleNotification(message);
+                Colleague1.HandleNotification(colleague, message);
             }
         }
     }

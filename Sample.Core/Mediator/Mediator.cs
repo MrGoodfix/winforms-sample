@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Sample.Core.Mediator
+﻿namespace Sample.Core.Mediator
 {
-    public abstract class Mediator
+    public abstract class Mediator : IMediator
     {
         public abstract void Send(string message, Colleague colleague);
     }

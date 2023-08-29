@@ -1,23 +1,24 @@
-﻿using System;
-
-namespace Sample.Core.Mediator.Structural
+﻿namespace Sample.Core.Mediator.Structural
 {
     public delegate void ColleagueNotificationHandler(Colleague colleague, string message);
 
     public class StructuralColleague : Colleague
     {
-        public string Name { get; }
-
         public event ColleagueNotificationHandler OnNotification;
 
-        public StructuralColleague(Mediator mediator, string name) : base(mediator)
-        {
+        public StructuralColleague(IMediator mediator, string name) : base(mediator) 
+        { 
             Name = name;
         }
 
-        public override void HandleNotification(string message)
+        public StructuralColleague()
         {
-            RaiseNotification($"Colleague {Name} received notification: {message}");
+            
+        }
+
+        public override void HandleNotification(IColleague colleague, string message)
+        {
+            RaiseNotification($"Colleague {Name} received notification from {colleague.Name}: {message}");
         }
 
         public void RaiseNotification(string message)
