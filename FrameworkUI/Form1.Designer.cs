@@ -30,6 +30,7 @@
         {
             this.btnInterestCalc = new System.Windows.Forms.Button();
             this.btnStructuralMediator = new System.Windows.Forms.Button();
+            this.btnChatRoom = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnInterestCalc
@@ -52,15 +53,27 @@
             this.btnStructuralMediator.UseVisualStyleBackColor = true;
             this.btnStructuralMediator.Click += new System.EventHandler(this.btnStructuralMediator_Click);
             // 
+            // btnChatRoom
+            // 
+            this.btnChatRoom.Location = new System.Drawing.Point(277, 173);
+            this.btnChatRoom.Name = "btnChatRoom";
+            this.btnChatRoom.Size = new System.Drawing.Size(150, 43);
+            this.btnChatRoom.TabIndex = 2;
+            this.btnChatRoom.Text = "Chat Room";
+            this.btnChatRoom.UseVisualStyleBackColor = true;
+            this.btnChatRoom.Click += new System.EventHandler(this.btnChatRoom_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnChatRoom);
             this.Controls.Add(this.btnStructuralMediator);
             this.Controls.Add(this.btnInterestCalc);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
 
         }
@@ -69,6 +82,7 @@
 
         private System.Windows.Forms.Button btnInterestCalc;
         private System.Windows.Forms.Button btnStructuralMediator;
+        private System.Windows.Forms.Button btnChatRoom;
     }
 }
 
